@@ -49,3 +49,13 @@ body{
 .audio{
     outline: none;
 }
+.lead{
+    height: 65px;
+    overflow: hidden;
+}
+.audio{
+    margin-top: 20px;
+}
+img{
+    margin-bottom: 10px;;
+}

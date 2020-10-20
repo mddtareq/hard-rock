@@ -8,8 +8,8 @@ const lyricsArea = document.getElementById('lyrics-area');
 
 
 search.addEventListener('click', function (event) {
-    document.getElementById('inject').innerHTML="";
-    document.getElementById('lyrics-show').innerHTML="";
+    document.getElementById('inject').innerHTML = "";
+    document.getElementById('lyrics-show').innerHTML = "";
     const searchResult = searchSong.value;
     if (searchResult != "") {
         getResults(searchResult);
@@ -32,24 +32,25 @@ function showResults(data) {
                 const artist = data.data[i].artist.name;
                 const albumTitle = data.data[i].album.title;
                 const preview = data.data[i].preview;
-                const picture= data.data[i].artist.picture_small;
+                const picture = data.data[i].artist.picture_small;
                 const parent = document.getElementById('inject');
                 const create = document.createElement('p');
                 create.innerHTML += `<div class="single-result row align-items-center my-3 p-3">
-                <div class="col-md-9 col-9 d-flex justify-content-start align-self-center">
+                <div class="col-md-7 col-sm-8 col-12 d-flex justify-content-start align-items-center">
                 <img src="${picture}" width="100" height="120" alt="">
                     <div class="pic">
                     <h3 id="song-title" class="lyrics-name">${title}</h3>
 
                     <p class="author lead"> <span id="album-title">${albumTitle}</span> by <span id="artist">${artist}</span></p>
-                    <audio class="audio" controls style="width: 250px; height:30px">
-                    <source src="${preview}" type="audio/mp3">
-                    </audio>
                     </div>
                 </div>
-                <div class="col-md-3 col-3 text-md-right text-center">
+                <div class="col-md-4 col-sm-4 col-12 text-md-right text-center">
                     <button id="btn-lyric" onclick="myFunction('${artist}','${title}')" class=" try btn btn-success">Get Lyrics</button>
                 </div>
+                <div class="col-md-12">
+                <audio class="audio" controls style="width: 100%; height:30px">
+                <source src="${preview}" type="audio/mp3">
+                    </audio>
             </div>`
                 parent.appendChild(create);
             }
@@ -58,14 +59,14 @@ function showResults(data) {
 }
 
 async function myFunction(artist, title) {
-    document.getElementById('lyrics-show').innerHTML="";
+    document.getElementById('lyrics-show').innerHTML = "";
     const response = await fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`)
     const lyrics = await response.json();
     const parent = document.getElementById('lyrics-show');
     const create = document.createElement('p');
-    const songLyrics=lyrics.lyrics;
-    if(response.status===200){
-    create.innerHTML += `
+    const songLyrics = lyrics.lyrics;
+    if (response.status === 200) {
+        create.innerHTML += `
     <div id="lyrics-area" class="lyrics">
     <br>
     <h2 id="lyrics-title">${title}</h2>
@@ -75,8 +76,8 @@ async function myFunction(artist, title) {
     <br>
     </div>`
     }
-    else{
-    create.innerHTML += `
+    else {
+        create.innerHTML += `
     <div id="lyrics-area" class="lyrics">    
     <br>
     <h2 id="lyrics-title"></h2>
